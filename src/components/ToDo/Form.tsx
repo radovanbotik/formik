@@ -2,28 +2,7 @@ import React from "react";
 import Input from "./Input";
 import { useFormik } from "formik";
 import Button from "./Button";
-
-const validate = values => {
-  const errors = {};
-  if (!values.firstname) {
-    errors.firstname = "First name is required!";
-  } else if (values.firstname.length > 15) {
-    errors.firstname = "Must be 15 characters or less.";
-  }
-
-  if (!values.lastname) {
-    errors.lastname = "Last name is required!";
-  } else if (values.lastname.length > 15) {
-    errors.lastname = "Must be 15 characters or less";
-  }
-
-  if (!values.email) {
-    errors.email = "Email is required!";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address!";
-  }
-  return errors;
-};
+import * as Yup from "yup";
 
 const Form = () => {
   const formik = useFormik({
@@ -32,28 +11,22 @@ const Form = () => {
       lastname: "",
       email: "",
     },
-    validate,
+    validationSchema: Yup.object({
+      firstname: Yup.string().max(15, "Must be 15 characters or less").required("This field is required."),
+      lastname: Yup.string().max(15, "Must be 15 characters or less").required("This field is requried."),
+      email: Yup.string().email("Invalid email address.").required("This field is required."),
+    }),
     onSubmit: values => {
       console.log(values);
     },
   });
   return (
     <form style={{ display: "flex", flexDirection: "column" }} onSubmit={formik.handleSubmit}>
-      <Input
-        onChange={formik.handleChange}
-        value={formik.values.firstname}
-        name={"firstname"}
-        onBlur={formik.handleBlur}
-      />
+      <Input formikprops={formik.getFieldProps("firstname")} id={"firstname"} />
       {formik.touched.firstname && formik.errors.firstname && <p>{formik.errors.firstname}</p>}
-      <Input
-        onChange={formik.handleChange}
-        value={formik.values.lastname}
-        name={"lastname"}
-        onBlur={formik.handleBlur}
-      />
+      <Input formikprops={formik.getFieldProps("lastname")} id={"lastname"} />
       {formik.touched.lastname && formik.errors.lastname && <p>{formik.errors.lastname}</p>}
-      <Input onChange={formik.handleChange} value={formik.values.email} name={"email"} onBlur={formik.handleBlur} />
+      <Input formikprops={formik.getFieldProps("email")} id={"email"} />
       {formik.touched.email && formik.errors.email && <p>{formik.errors.email}</p>}
       <Button />
     </form>
