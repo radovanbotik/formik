@@ -12,7 +12,7 @@ const Formular = () => {
       initialValues={{ firstname: "", lastname: "", email: "", TOS: false, haircolor: "" }}
       validationSchema={Yup.object({
         firstname: Yup.string().max(15, "Must be 15 characters or less").required("This field is required."),
-        lastname: Yup.string().max(15, "Must be 15 characters or less").required("This field is requried."),
+        lastname: Yup.string().max(15, "Must be 15 characters or less").required("This field is required."),
         email: Yup.string().email("Invalid email address.").required("This field is required."),
         TOS: Yup.boolean().isTrue("You have to agree to our TOS in order to continue."),
         haircolor: Yup.string()
@@ -20,18 +20,20 @@ const Formular = () => {
           .required("This field is required."),
       })}
       onSubmit={(values, actions) => {
-        console.log(actions);
-        console.log(values);
+        actions.resetForm();
+        actions.setSubmitting(false);
       }}
     >
       {formik => (
-        <Form className="flex flex-col max-w-md">
+        <Form className="flex flex-col w-md">
           <TextInput label="First Name" name="firstname" type="text" />
           <TextInput label="Last Name" name="lastname" type="text" />
           <TextInput label="Email" name="email" type="email" />
           <Checkbox name="TOS">I accept TOS</Checkbox>
           <Select label="Select desired hair color" name="haircolor">
-            <option value="">Please select a haircolor</option>
+            <option value="" disabled>
+              Please select a haircolor
+            </option>
             <option value="blonde">Blonde</option>
             <option value="red">Red</option>
             <option value="blue">Blue</option>

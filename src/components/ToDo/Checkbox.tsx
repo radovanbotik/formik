@@ -5,14 +5,25 @@ import ErrorMessage from "./ErrorMessage";
 const Checkbox = ({ children, ...props }) => {
   const [field, meta] = useField({ ...props, type: "checkbox" });
 
-  const errorStyles = meta.touched && meta.error && "border-2 border-solid border-red-500";
+  const isError = meta.touched && meta.error;
+  const isValid = Boolean(meta.value);
+
   return (
-    <div>
-      <label className={`${errorStyles}`}>
-        <input type="checkbox" {...field} {...props} />
-        {children}
+    <div className="form-control">
+      <label className={`label cursor-pointer`}>
+        <span className="label-text">{children}</span>
+        <input
+          type="checkbox"
+          {...field}
+          {...props}
+          className={`checkbox ${isError && "checkbox-error"} ${isValid && "checkbox-success"}`}
+        />
       </label>
-      {meta.touched && meta.error && <ErrorMessage message={meta.error} />}
+      {isError && (
+        <label className="label">
+          <span className="label-text-alt">{meta.error}</span>
+        </label>
+      )}
     </div>
   );
 };
