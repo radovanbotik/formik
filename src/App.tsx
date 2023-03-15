@@ -1,9 +1,8 @@
-import "./App.css";
 import Form from "./components/ToDo/Form";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App flex place-content-center">
       <Form />
     </div>
   );

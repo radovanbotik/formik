@@ -19,12 +19,13 @@ const Formular = () => {
           .oneOf(["blonde", "red", "blue"], "Please select from provided haircolors.")
           .required("This field is required."),
       })}
-      onSubmit={values => {
+      onSubmit={(values, actions) => {
+        console.log(actions);
         console.log(values);
       }}
     >
       {formik => (
-        <Form style={{ display: "flex", flexDirection: "column" }}>
+        <Form className="flex flex-col max-w-md">
           <TextInput label="First Name" name="firstname" type="text" />
           <TextInput label="Last Name" name="lastname" type="text" />
           <TextInput label="Email" name="email" type="email" />
@@ -35,7 +36,7 @@ const Formular = () => {
             <option value="red">Red</option>
             <option value="blue">Blue</option>
           </Select>
-          <Button />
+          <Button isSubmiting={formik.isSubmitting} />
         </Form>
       )}
     </Formik>

@@ -1,7 +1,11 @@
 import React from "react";
 
-const Button = () => {
-  return <button type="submit">submit</button>;
+const Button = ({ isSubmiting }) => {
+  return (
+    <button type="submit" disabled={isSubmiting}>
+      submit
+    </button>
+  );
 };
 
 export default Button;
