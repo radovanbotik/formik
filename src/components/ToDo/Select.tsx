@@ -4,7 +4,6 @@ import { useField } from "formik";
 const Select = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
-  const errorStyles = meta.touched && meta.error && "border-2 border-solid border-red-500";
   const isError = meta.touched && meta.error;
   const isValid = Boolean(meta.value);
 
