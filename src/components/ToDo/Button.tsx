@@ -3,9 +3,11 @@ import React from "react";
 const Button = ({ isSubmiting }) => {
   const isSubmitting = Boolean(isSubmiting);
   return (
-    <button type="submit" disabled={isSubmiting} className={`btn ${isSubmiting && "loading"} mt-4`}>
-      submit
-    </button>
+    <div className="form-control mt-6">
+      <button type="submit" disabled={isSubmiting} className={`btn btn-primary ${isSubmiting && "loading"}`}>
+        submit
+      </button>
+    </div>
   );
 };
 

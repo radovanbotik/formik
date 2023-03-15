@@ -25,7 +25,7 @@ const Formular = () => {
       }}
     >
       {formik => (
-        <Form className="flex flex-col w-md">
+        <Form className="card-body">
           <TextInput label="First Name" name="firstname" type="text" />
           <TextInput label="Last Name" name="lastname" type="text" />
           <TextInput label="Email" name="email" type="email" />
