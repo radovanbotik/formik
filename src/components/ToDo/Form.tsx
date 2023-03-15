@@ -7,11 +7,12 @@ import * as Yup from "yup";
 const Formular = () => {
   return (
     <Formik
-      initialValues={{ firstname: "", lastname: "", email: "" }}
+      initialValues={{ firstname: "", lastname: "", email: "", hair: "blonde" }}
       validationSchema={Yup.object({
         firstname: Yup.string().max(15, "Must be 15 characters or less").required("This field is required."),
         lastname: Yup.string().max(15, "Must be 15 characters or less").required("This field is requried."),
         email: Yup.string().email("Invalid email address.").required("This field is required."),
+        hair: Yup.string().required("This field is required."),
       })}
       onSubmit={values => {
         console.log(values);
@@ -36,6 +37,15 @@ const Formular = () => {
           <label htmlFor="email">Email</label>
           <Field name="email" type="email" />
           <ErrorMessage name="email" />
+
+          <label htmlFor="hair">Hair</label>
+          <Field name="hair" as="select">
+            <option value="blonde">Blonde</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+          </Field>
+          <ErrorMessage name="hair" />
+
           <Button />
         </Form>
       )}
