@@ -1,9 +1,9 @@
-import Form from "./components/ToDo/Form";
+import Form from "./components/Form/Form";
 
 function App() {
   return (
     <div className="App flex place-content-center">
-      <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div className="card w-full max-w-sm flex-shrink-0 bg-base-100 shadow-2xl">
         <Form />
       </div>
     </div>
