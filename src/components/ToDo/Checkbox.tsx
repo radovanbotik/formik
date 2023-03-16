@@ -1,9 +1,14 @@
-import React from "react";
+import React, { ReactNode, ComponentPropsWithoutRef } from "react";
 import { useField } from "formik";
-import ErrorMessage from "./ErrorMessage";
 
-const Checkbox = ({ children, ...props }) => {
-  const [field, meta] = useField({ ...props, type: "checkbox" });
+interface InputProps extends ComponentPropsWithoutRef<"input"> {
+  name: string;
+  type: string;
+  children: ReactNode;
+}
+
+const Checkbox = ({ children, ...props }: InputProps) => {
+  const [field, meta] = useField({ ...props, type: props.type });
 
   const isError = meta.touched && meta.error;
   const isValid = Boolean(meta.value);
@@ -13,7 +18,6 @@ const Checkbox = ({ children, ...props }) => {
       <label className={`label cursor-pointer`}>
         <span className="label-text">{children}</span>
         <input
-          type="checkbox"
           {...field}
           {...props}
           className={`checkbox ${isError && "checkbox-error"} ${isValid && "checkbox-success"}`}

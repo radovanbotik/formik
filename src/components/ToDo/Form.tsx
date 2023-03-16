@@ -29,7 +29,9 @@ const Formular = () => {
           <TextInput label="First Name" name="firstname" type="text" />
           <TextInput label="Last Name" name="lastname" type="text" />
           <TextInput label="Email" name="email" type="email" />
-          <Checkbox name="TOS">I accept TOS</Checkbox>
+          <Checkbox name="TOS" type="checkbox">
+            I accept TOS
+          </Checkbox>
           <Select label="Select desired hair color" name="haircolor">
             <option value="" disabled>
               Please select a haircolor
@@ -38,7 +40,9 @@ const Formular = () => {
             <option value="red">Red</option>
             <option value="blue">Blue</option>
           </Select>
-          <Button isSubmiting={formik.isSubmitting} />
+          <Button isSubmitting={formik.isSubmitting} type="submit">
+            Submit
+          </Button>
         </Form>
       )}
     </Formik>

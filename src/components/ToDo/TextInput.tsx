@@ -1,7 +1,13 @@
+import React, { InputHTMLAttributes } from "react";
 import { useField } from "formik";
-import React from "react";
 
-const TextInput = ({ label, ...props }) => {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  type: string;
+  name: string;
+}
+
+const TextInput = ({ label, ...props }: InputProps) => {
   const [field, meta] = useField(props);
 
   const isError = meta.touched && meta.error;
@@ -15,8 +21,8 @@ const TextInput = ({ label, ...props }) => {
       <input
         {...field}
         {...props}
-        className={`input input-bordered ${isValid && "input-success"} ${
-          isError && "input-error shake"
+        className={`input-bordered input ${isValid && "input-success"} ${
+          isError && "shake input-error"
         } w-full max-w-xs`}
       />
       {isError && (

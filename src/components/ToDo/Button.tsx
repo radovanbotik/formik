@@ -1,11 +1,16 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 
-const Button = ({ isSubmiting }) => {
-  const isSubmit = Boolean(isSubmiting);
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isSubmitting: boolean;
+  type: "submit";
+  children: string;
+}
+
+const Button = ({ isSubmitting, type, children }: ButtonProps) => {
   return (
     <div className="form-control mt-6">
-      <button type="submit" disabled={isSubmit} className={`btn btn-primary ${isSubmit && "loading"}`}>
-        submit
+      <button type={type} disabled={isSubmitting} className={`btn-primary btn ${isSubmitting && "loading"}`}>
+        {children}
       </button>
     </div>
   );

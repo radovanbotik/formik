@@ -1,10 +1,15 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import { useField } from "formik";
 
-const Select = ({ label, ...props }) => {
+interface InputProps extends InputHTMLAttributes<HTMLSelectElement> {
+  label: string;
+  name: string;
+}
+
+const Select = ({ label, ...props }: InputProps) => {
   const [field, meta] = useField(props);
 
-  const isError = meta.touched && meta.error;
+  const isError = Boolean(meta.touched && meta.error);
   const isValid = Boolean(meta.value);
 
   return (
